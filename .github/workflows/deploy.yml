@@ -22,7 +22,7 @@ jobs:
           aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           region: us-east-1
-          application_name: "assignment-03"        
-          environment_name: "Assignment-03-env"   
+          application_name: "assignment-03"
+          environment_name: "Assignment-03-env"
           version_label: ${{ github.sha }}
-          deployment_package: docker-compose.yml 
+          deployment_package: Dockerrun.aws.json
