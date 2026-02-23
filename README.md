@@ -1,73 +1,25 @@
-# React + TypeScript + Vite
+# Proyecto: Aplicación Web con Despliegue en AWS Beanstalk
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Este proyecto es una aplicación web estática construida con **Vite**, dockerizada y desplegada automáticamente mediante **GitHub Actions** en **AWS Elastic Beanstalk**.
 
-Currently, two official plugins are available:
+## URL de la Aplicación
+http://assignment-03-env.eba-gfgg5qpe.us-east-1.elasticbeanstalk.com/
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Implementación de Husky
+En este proyecto, se configuró **Husky** para mejorar la calidad del código y mantener la consistencia en el repositorio.
 
-## React Compiler
+**¿Para qué se usó?**
+Se implementó un hook de `pre-commit` que realiza las siguientes acciones antes de permitir un commit:
+* **Linting/Formatting:** Asegura que el código siga las reglas de estilo definidas.
+* **Validación de Mensajes:** (Si configuraste commitlint) Verifica que los mensajes sigan el formato requerido.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+Esto evita que subamos código con errores básicos o estilos inconsistentes al pipeline de CI/CD, ahorrando tiempo y recursos de cómputo en AWS.
 
-## Expanding the ESLint configuration
+## Configuración de AWS Beanstalk
+La aplicación corre sobre un entorno de **Docker de 64 bits**. Se configuraron los secretos (Access Keys y Region) de forma segura utilizando **Doppler**, los cuales se sincronizan automáticamente con GitHub Actions.
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+### Evidencia del Despliegue
+Captura de la Aplicación en la carpeta Docs
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
-
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+### Configuración en la Consola de AWS
+Capturas de la Configuracion de AWS en la carpeta Docs
