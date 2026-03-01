@@ -10,37 +10,41 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # 1️⃣ Descargar el código
+      # 1️⃣ Descargar el código del repositorio
       - name: Checkout código
         uses: actions/checkout@v4
 
-      # 2️⃣ Configurar Node (para Vite build)
+      # 2️⃣ Configurar Node.js (necesario si tu Dockerfile hace un build de Vite/Node)
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
           node-version: 20
 
-      # 3️⃣ Instalar Doppler CLI
+      # 3️⃣ Instalar Doppler CLI en el runner de GitHub
       - name: Instalar Doppler CLI
         uses: dopplerhq/cli-action@v3
 
-      # 4️⃣ Ejecutar todo dentro de Doppler
-      # doppler run inyecta los secretos como variables de entorno
+      # 4️⃣ Login, Build y Push usando Doppler para inyectar los secretos
       - name: Build y push Docker
-        run: |
-          echo "Login en Docker Hub..."
-          echo "$DOCKERHUB_TOKEN" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin
-
-          IMAGE_NAME=${DOCKERHUB_USERNAME}/arquitectura-app
-          COMMIT_SHA=${GITHUB_SHA}
-
-          echo "Construyendo imagen Docker..."
-          docker build -t $IMAGE_NAME:latest -t $IMAGE_NAME:$COMMIT_SHA .
-
-          echo "Subiendo imagen Docker..."
-          docker push $IMAGE_NAME:latest
-          docker push $IMAGE_NAME:$COMMIT_SHA
-        shell: bash
         env:
           DOPPLER_TOKEN: ${{ secrets.DOPPLER_TOKEN }}
-      
+        shell: bash
+        run: |
+          # Usamos 'doppler run' para que las variables DOCKERHUB_... estén disponibles
+          doppler run -- bash -c '
+            echo "Login en Docker Hub..."
+            echo "$DOCKERHUB_TOKEN" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin
+
+            # Definir nombres de imagen usando las variables de Doppler
+            IMAGE_NAME="${DOCKERHUB_USERNAME}/arquitectura-app"
+            COMMIT_SHA="${GITHUB_SHA}"
+
+            echo "Construyendo imagen Docker para: $IMAGE_NAME"
+            docker build -t "$IMAGE_NAME:latest" -t "$IMAGE_NAME:$COMMIT_SHA" .
+
+            echo "Subiendo imágenes a Docker Hub..."
+            docker push "$IMAGE_NAME:latest"
+            docker push "$IMAGE_NAME:$COMMIT_SHA"
+            
+            echo "¡Despliegue completado con éxito!"
+          '
