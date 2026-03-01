@@ -1,28 +1,46 @@
-name: Deploy to AWS Beanstalk
+name: Docker Build and Push
 
 on:
   push:
     branches:
-      - assignment-03
+      - assignment-04
 
 jobs:
-  deploy:
+  build-and-push:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
+      - name: Checkout código
         uses: actions/checkout@v4
 
-      - name: Create deployment package
-        run: zip -r deploy.zip . -x "*.git*"
-
-      - name: Deploy to Elastic Beanstalk
-        uses: einaregilsson/beanstalk-deploy@v22
+      - name: Setup Node
+        uses: actions/setup-node@v4
         with:
-          aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          region: us-east-1
-          application_name: assignment-03
-          environment_name: Assignment-03-env
-          version_label: ${{ github.sha }}
-          deployment_package: deploy.zip
+          node-version: 20
+
+      - name: Instalar Doppler CLI
+        uses: dopplerhq/cli-action@v3
+
+      - name: Cargar secretos de Doppler
+        run: doppler secrets download --no-file --format env > .env
+        env:
+          DOPPLER_TOKEN: ${{ secrets.DOPPLER_TOKEN }}
+
+      - name: Login en Docker Hub
+        run: echo "$DOCKERHUB_TOKEN" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin
+        env:
+          DOCKERHUB_USERNAME: ${{ env.DOCKERHUB_USERNAME }}
+          DOCKERHUB_TOKEN: ${{ env.DOCKERHUB_TOKEN }}
+
+      - name: Build Docker Image
+        run: |
+          IMAGE_NAME=${{ env.DOCKERHUB_USERNAME }}/arquitectura-app
+          COMMIT_SHA=${{ github.sha }}
+          docker build -t $IMAGE_NAME:latest -t $IMAGE_NAME:$COMMIT_SHA .
+
+      - name: Push Docker Image
+        run: |
+          IMAGE_NAME=${{ env.DOCKERHUB_USERNAME }}/arquitectura-app
+          COMMIT_SHA=${{ github.sha }}
+          docker push $IMAGE_NAME:latest
+          docker push $IMAGE_NAME:$COMMIT_SHA
