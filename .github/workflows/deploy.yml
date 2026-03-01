@@ -10,37 +10,37 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      # 1️⃣ Descargar el código
       - name: Checkout código
         uses: actions/checkout@v4
 
+      # 2️⃣ Configurar Node (para Vite build)
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
           node-version: 20
 
+      # 3️⃣ Instalar Doppler CLI
       - name: Instalar Doppler CLI
         uses: dopplerhq/cli-action@v3
 
-      - name: Cargar secretos de Doppler
-        run: doppler secrets download --no-file --format env > .env
-        env:
-          DOPPLER_TOKEN: ${{ secrets.DOPPLER_TOKEN }}
-
-      - name: Login en Docker Hub
-        run: echo "$DOCKERHUB_TOKEN" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin
-        env:
-          DOCKERHUB_USERNAME: ${{ env.DOCKERHUB_USERNAME }}
-          DOCKERHUB_TOKEN: ${{ env.DOCKERHUB_TOKEN }}
-
-      - name: Build Docker Image
+      # 4️⃣ Ejecutar todo dentro de Doppler
+      # doppler run inyecta los secretos como variables de entorno
+      - name: Build y push Docker
         run: |
-          IMAGE_NAME=${{ env.DOCKERHUB_USERNAME }}/arquitectura-app
-          COMMIT_SHA=${{ github.sha }}
+          echo "Login en Docker Hub..."
+          echo "$DOCKERHUB_TOKEN" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin
+
+          IMAGE_NAME=${DOCKERHUB_USERNAME}/arquitectura-app
+          COMMIT_SHA=${GITHUB_SHA}
+
+          echo "Construyendo imagen Docker..."
           docker build -t $IMAGE_NAME:latest -t $IMAGE_NAME:$COMMIT_SHA .
 
-      - name: Push Docker Image
-        run: |
-          IMAGE_NAME=${{ env.DOCKERHUB_USERNAME }}/arquitectura-app
-          COMMIT_SHA=${{ github.sha }}
+          echo "Subiendo imagen Docker..."
           docker push $IMAGE_NAME:latest
           docker push $IMAGE_NAME:$COMMIT_SHA
+        shell: bash
+        env:
+          DOPPLER_TOKEN: ${{ secrets.DOPPLER_TOKEN }}
+      
