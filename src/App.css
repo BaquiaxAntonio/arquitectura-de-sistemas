@@ -1,14 +1,103 @@
 :root {
-  --bg-color: #0f172a;      /* Azul muy oscuro */
-  --card-bg: #1e293b;      /* Gris azulado */
-  --text-main: #f8fafc;    /* Blanco roto */
-  --text-muted: #94a3b8;   /* Gris azulado suave */
-  --github-color: #475569; 
-  --aws-color: #fbbf24;    /* Ámbar */
-  --accent: #38bdf8;
+  --bg-color: #f3f4f6;
+  --card-bg: #ffffff;
+  --text-main: #1f2937;
+  --text-muted: #6b7280;
+  --github-color: #24292e;
+  --aws-color: #ff9900;
+  --accent: #4f46e5;
 }
 
-/* Agregamos un borde sutil a la card */
+/* ===== Reset ===== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* ===== Body ===== */
+body {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+/* ===== Layout ===== */
+.container {
+  width: 100%;
+  max-width: 400px;
+  padding: 20px;
+}
+
+/* ===== Card ===== */
 .card {
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(15px); /* Desenfoque de fondo */
+  -webkit-backdrop-filter: blur(15px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  color: #ffffff;
+}
+
+/* ===== Badge ===== */
+.badge {
+  background: rgba(255, 255, 255, 0.2);
+  color: #fff;
+}
+
+/* ===== Title ===== */
+h1 {
+  font-size: 1.5rem;
+  font-weight: 800;
+  margin-bottom: 2rem;
+}
+
+/* ===== Buttons ===== */
+.button-group {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.btn {
+  display: block;
+
+  padding: 12px;
+  border-radius: 12px;
+
+  text-decoration: none;
+  font-weight: 600;
+
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+  opacity: 0.9;
+}
+
+/* GitHub Button */
+.btn-github {
+  background-color: var(--github-color);
+  color: #ffffff;
+}
+
+/* AWS Button */
+.btn-aws {
+  background-color: var(--aws-color);
+  color: #232f3e;
+}
+
+/* ===== Footer ===== */
+.footer {
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+
+  border-top: 1px solid #f3f4f6;
+
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+.footer span {
+  font-weight: bold;
+  color: var(--aws-color);
 }
