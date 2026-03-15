@@ -2,9 +2,10 @@
   "name": "backend",
   "version": "1.0.0",
   "scripts": {
-  "build": "tsc && npx prisma generate",
-  "start": "node dist/server.js"
-}
+    "dev": "nodemon --watch \"src/**/*\" --ext ts --exec \"ts-node src/server.ts\"",
+    "build": "tsc",
+    "start": "node dist/server.js"
+  },
   "dependencies": {
     "@prisma/client": "^5.0.0",
     "cors": "^2.8.5",
