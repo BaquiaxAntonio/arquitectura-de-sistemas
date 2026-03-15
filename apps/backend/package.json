@@ -7,7 +7,7 @@
     "start": "node dist/server.js"
   },
   "prisma": {
-  "schema": "prisma/schema.prisma"
+  "schema": "package/database/prisma/schema.prisma"
   },
   "dependencies": {
     "@prisma/client": "^5.0.0",
