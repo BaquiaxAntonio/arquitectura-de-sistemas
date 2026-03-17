@@ -1,9 +1,9 @@
 import { PrismaClient } from "@prisma/client";
 
-// En producción (Render), usamos el pooler vía DATABASE_URL
-// En local, también usamos DATABASE_URL que ahora apunta al pooler
-const databaseUrl = process.env.DATABASE_URL;
-if (!databaseUrl) throw new Error("DATABASE_URL no está definida");
+// En producción (Render), usamos DIRECT_URL para evitar problemas con el pooler
+// El pooler de Supabase (pgbouncer) tiene problemas con Prisma
+const databaseUrl = process.env.DIRECT_URL || process.env.DATABASE_URL;
+if (!databaseUrl) throw new Error("No hay URL de base de datos configurada");
 
 const prisma = new PrismaClient({
   datasources: { db: { url: databaseUrl } },
