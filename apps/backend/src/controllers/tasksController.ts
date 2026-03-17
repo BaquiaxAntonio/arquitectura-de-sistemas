@@ -1,6 +1,5 @@
-// apps/backend/src/controllers/tasksController.ts
 import { Request, Response } from "express";
-import { prisma } from "../lib/prisma";
+import prisma from "../lib/prisma.js"; 
 
 // Obtener todas las tareas
 export const getTasks = async (req: Request, res: Response) => {
