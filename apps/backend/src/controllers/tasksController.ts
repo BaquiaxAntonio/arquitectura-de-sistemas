@@ -31,12 +31,14 @@ import prisma from "../lib/prisma.js";
  */
 export const getTasks = async (req: Request, res: Response) => {
   try {
+    console.log("Intentando conectar a la base de datos...");
     const tasks = await prisma.task.findMany({
       orderBy: { id: "desc" }
     });
+    console.log("Tareas obtenidas:", tasks);
     res.json(tasks);
   } catch (error) {
-    console.error(error);
+    console.error("Error completo:", error);
     res.status(500).json({ error: "Error fetching tasks" });
   }
 };
