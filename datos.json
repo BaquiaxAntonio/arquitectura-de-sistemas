@@ -23,7 +23,7 @@
   "model": "api.curso",
   "pk": 1,
   "fields": {
-    "nombre": "FÌsica",
+    "nombre": "F√≠sica",
     "descripcion": "ciencia natural que estudia los componentes fundamentales del universo",
     "duracion": 2,
     "nivel": "1"
@@ -33,8 +33,8 @@
   "model": "api.curso",
   "pk": 2,
   "fields": {
-    "nombre": "matem·ticas",
-    "descripcion": "Las matem·ticas son la ciencia formal que estudia las propiedades, relaciones y estructuras de n˙meros, figuras geomÈtricas y sÌmbolos abstractos, basadas en la lÛgica.",
+    "nombre": "matem√°ticas",
+    "descripcion": "Las matem√°ticas son la ciencia formal que estudia las propiedades, relaciones y estructuras de n√∫meros, figuras geom√©tricas y s√≠mbolos abstractos, basadas en la l√≥gica.",
     "duracion": 3,
     "nivel": "1"
   }
