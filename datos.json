@@ -1,0 +1,42 @@
+[
+{
+  "model": "api.usuario",
+  "pk": 1,
+  "fields": {
+    "nombre": "Jose",
+    "email": "jose@gmail.com",
+    "edad": 20,
+    "fecha_registro": "2026-04-12"
+  }
+},
+{
+  "model": "api.usuario",
+  "pk": 2,
+  "fields": {
+    "nombre": "juan",
+    "email": "juan@gmail.com",
+    "edad": 19,
+    "fecha_registro": "2026-04-12"
+  }
+},
+{
+  "model": "api.curso",
+  "pk": 1,
+  "fields": {
+    "nombre": "Física",
+    "descripcion": "ciencia natural que estudia los componentes fundamentales del universo",
+    "duracion": 2,
+    "nivel": "1"
+  }
+},
+{
+  "model": "api.curso",
+  "pk": 2,
+  "fields": {
+    "nombre": "matemáticas",
+    "descripcion": "Las matemáticas son la ciencia formal que estudia las propiedades, relaciones y estructuras de números, figuras geométricas y símbolos abstractos, basadas en la lógica.",
+    "duracion": 3,
+    "nivel": "1"
+  }
+}
+]
