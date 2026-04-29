@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deployment-assignment04
+  labels:
+    app: assignment04
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: assignment04
+  template:
+    metadata:
+      labels:
+        app: assignment04
+    spec:
+      containers:
+      - name: container-app
+        image: henrybaquiax/assignment-04:latest
+        ports:
+        - containerPort: 80
