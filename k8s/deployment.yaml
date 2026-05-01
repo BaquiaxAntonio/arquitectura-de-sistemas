@@ -16,6 +16,7 @@ spec:
     spec:
       containers:
       - name: container-app
-        image: henrybaquiax/assignment-04:latest
+        image: henrybaquiax/arquitectura-app:latest
+        imagePullPolicy: Always
         ports:
         - containerPort: 80
