@@ -7,7 +7,7 @@ spec:
   entryPoints:
     - web
   routes:
-    - match: Host(`argo.henry-baquiax.com`) # Actualizado para coincidir con tu dominio
+    - match: Host(`argo.henry-baquiax.com`)
       kind: Rule
       services:
         - name: argocd-server
