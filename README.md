@@ -168,21 +168,6 @@ Debido a limitaciones del entorno local (Minikube en Windows):
 * Se configuró DNS local mediante archivo `hosts`
 * Se logró simular un entorno real de acceso mediante dominio personalizado
 
----
-
-# ✅ Cumplimiento de requisitos
-
-| Requisito              | Estado |
-| ---------------------- | ------ |
-| Clúster con Minikube   | ✅      |
-| Instalación de Traefik | ✅      |
-| Instalación de ArgoCD  | ✅      |
-| Aplicación desplegada  | ✅      |
-| DNS local configurado  | ✅      |
-| IaC (YAML)             | ✅      |
-
----
-
 # 👨‍💻 Autor
 
 Henry Baquiax
