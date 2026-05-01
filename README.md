@@ -30,7 +30,7 @@ Contenido:
 
 📸 Evidencia:
 
-![Archivo hosts mostrando los dominios](Docs/Archivo hosts.png)
+![Archivo hosts mostrando los dominios](Docs/Archivo%20hosts%20mostrando%20los%20dominios.png)
 
 ---
 
@@ -40,7 +40,7 @@ Contenido:
 
 📸 Evidencia:
 
-![Nodo Ready](Docs/nodo Ready.png)
+![Nodo Ready](Docs/nodo%20Ready.png)
 
 ---
 
@@ -50,7 +50,7 @@ Contenido:
 
 📸 Evidencia:
 
-![Pods app](Docs/Pods de la app en Running.png)
+![Pods app](Docs/Pods%20de%20la%20app%20en%20Running.png)
 
 ---
 
@@ -58,7 +58,7 @@ Contenido:
 
 📸 Evidencia:
 
-![Pods Traefik](Docs/Pods de Traefik en Running.png)
+![Pods Traefik](Docs/Pods%20de%20Traefik%20en%20Running.png)
 
 ---
 
@@ -72,7 +72,7 @@ http://app.henry-baquiax.com:8080
 
 📸 Evidencia:
 
-![App funcionando](Docs/app funcionando con el 20dominio.png)
+![App funcionando](Docs/app%20funcionando%20con%20el%20dominio.png)
 
 ---
 
@@ -86,7 +86,7 @@ http://argo.henry-baquiax.com:9090
 
 📸 Evidencia:
 
-![ArgoCD Dashboard](Docs/Dashboard de ArgoCD.png)
+![ArgoCD Dashboard](Docs/Dashboard%20de%20ArgoCD.png)
 
 ---
 
@@ -168,6 +168,20 @@ Debido a limitaciones del entorno local (Minikube en Windows):
 * Se configuró DNS local mediante archivo `hosts`
 * Se logró simular un entorno real de acceso mediante dominio personalizado
 
+---
+
+# ✅ Cumplimiento de requisitos
+
+| Requisito              | Estado |
+| ---------------------- | ------ |
+| Clúster con Minikube   | ✅      |
+| Instalación de Traefik | ✅      |
+| Instalación de ArgoCD  | ✅      |
+| Aplicación desplegada  | ✅      |
+| DNS local configurado  | ✅      |
+| IaC (YAML)             | ✅      |
+
+---
 
 # 👨‍💻 Autor
 
