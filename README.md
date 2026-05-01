@@ -30,7 +30,7 @@ Contenido:
 
 📸 Evidencia:
 
-![Archivo hosts mostrando los dominios](Docs/Archivo%20hosts%20mostrando%20los%20dominios.png)
+![Archivo hosts mostrando los dominios](Docs/Archivo%20hosts.png)
 
 ---
 
